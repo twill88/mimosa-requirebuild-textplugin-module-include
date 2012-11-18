@@ -1,4 +1,37 @@
 mimosa-requirebuild-textplugin-include
-======================================
+===========
 
-Example Mimosa module for modifiying the r.js config pre-optimize
+Say that 3 times fast.
+
+## Overview
+
+This is a Mimosa module.  It both serves as a module to be used with Mimosa, and also serves as an example for how one would write a module to intercept the r.js configurations before optimization occurs.
+
+The actual function of this module is to find text dependencies and include them in the `include` array for a r.js run via the requirejs text plugin.
+
+For more information regarding Mimosa, see http://mimosajs.com
+
+## Usage
+
+Until it is in NPM...
+
+Clone this repo.  From inside the cloned repo, execute `mimosa mod:install`.  Add `'mimosa-requirebuild-textplugin-include'` to your list of modules.
+
+When it is in NPM...
+
+Add `'mimosa-requirebuild-textplugin-include'` to your list of modules.  That's all!  Mimosa will install the module for you when you start up.
+
+## Functionality
+
+The `'mimosa-requirebuild-textplugin-include'` module configuration is a pointer to the requirejs text plugin, and a list of extensions to include in the r.js `include` array appended to the text plugin.
+
+## Default Config
+
+```
+requireBuildTextPluginInclude:
+  pluginPath: "vendor/text"
+  extensions: ["html"]
+```
+
+* `pluginPath`: a string, the AMD path to your requirejs text plugin
+* `extensions`: an array of strings,  list of extensions for files to include in the r.js config's 'include' array attached to the text plugin at `pluginPath` path listed above.  Ex: vendor/text!app/foo.html. All files in the watch.javascriptDir that match this extension will be pushed into the array and already present array entries will be left alone. Extensions should not include the period.
