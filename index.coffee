@@ -11,7 +11,7 @@ registration = (mimosaConfig, register) ->
   if mimosaConfig.isOptimize
     e = mimosaConfig.extensions
     register ['add','update','remove'], 'beforeOptimize', _appendFilesToInclude, [e.javascript..., e.template...]
-    register ['buildDone'],             'beforeOptimize', _appendFilesToInclude
+    register ['postBuild'],             'beforeOptimize', _appendFilesToInclude
 
 
 _appendFilesToInclude = (mimosaConfig, options, next) ->
