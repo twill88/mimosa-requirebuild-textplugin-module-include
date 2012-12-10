@@ -7,6 +7,8 @@ wrench = require "wrench"
 
 config = require './config'
 
+windowsDrive = /^[A-Za-z]:\\/
+
 registration = (mimosaConfig, register) ->
   if mimosaConfig.isOptimize
     e = mimosaConfig.extensions
@@ -19,19 +21,25 @@ _appendFilesToInclude = (mimosaConfig, options, next) ->
   return next() unless mimosaConfig.requireBuildTextPluginInclude.extensions.length > 0
 
   options.runConfigs.forEach (runConfig) ->
-    files = wrench.readdirSyncRecursive runConfig.baseUrl
+    includeFolder = __determinePath mimosaConfig.requireBuildTextPluginInclude.folder, runConfig.baseUrl
+    files = wrench.readdirSyncRecursive includeFolder
     files = files.map (file) ->
-      path.join runConfig.baseUrl, file
+      path.join includeFolder, file
     .filter (file) ->
       fs.statSync(file).isFile()
 
     files.forEach (file) ->
       ext = path.extname(file).substring(1)
       if mimosaConfig.requireBuildTextPluginInclude.extensions.indexOf(ext) > -1
-        fileAMD = file.replace(runConfig.baseUrl, '').substring(1)
+        fileAMD = (file.replace(runConfig.baseUrl, '').substring(1)).replace(/\\/g, "/")
         runConfig.include.push "#{mimosaConfig.requireBuildTextPluginInclude.pluginPath}!#{fileAMD}"
 
   next()
+
+__determinePath = (thePath, relativeTo) ->
+  return thePath if windowsDrive.test thePath
+  return thePath if thePath.indexOf("/") is 0
+  path.join relativeTo, thePath
 
 module.exports =
   registration: registration
