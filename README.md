@@ -23,15 +23,17 @@ Add `'mimosa-requirebuild-textplugin-include'` to your list of modules.  That's 
 
 ## Functionality
 
-The `'mimosa-requirebuild-textplugin-include'` module configuration is a pointer to the requirejs text plugin, and a list of extensions to include in the r.js `include` array appended to the text plugin.
+The `'mimosa-requirebuild-textplugin-include'` module configuration is a pointer to a directory of files to include, the requirejs text plugin and a list of extensions to include in the r.js `include` array appended to the text plugin.
 
 ## Default Config
 
 ```
 requireBuildTextPluginInclude:
+  folder: "views"
   pluginPath: "vendor/text"
   extensions: ["html"]
 ```
 
+* `folder`: a string, a directory within the javascriptDir that narrows down the search for files to include
 * `pluginPath`: a string, the AMD path to your requirejs text plugin
-* `extensions`: an array of strings,  list of extensions for files to include in the r.js config's 'include' array attached to the text plugin at `pluginPath` path listed above.  Ex: vendor/text!app/foo.html. All files in the watch.javascriptDir that match this extension will be pushed into the array and already present array entries will be left alone. Extensions should not include the period.
+* `extensions`: an array of strings,  list of extensions for files to include in the r.js config's 'include' array attached to the text plugin at `pluginPath` path listed above.  Ex: vendor/text!app/foo.html. All files in the watch.javascriptDir/folder that match this extension will be pushed into the array and already present array entries will be left alone. Extensions should not include the period.
