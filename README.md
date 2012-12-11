@@ -29,11 +29,11 @@ The `'mimosa-requirebuild-textplugin-include'` module configuration is a pointer
 
 ```
 requireBuildTextPluginInclude:
-  folder: "views"
+  folder: ""
   pluginPath: "vendor/text"
   extensions: ["html"]
 ```
 
-* `folder`: a string, a directory within the javascriptDir that narrows down the search for files to include
+* `folder`: a string, a directory within the `watch.javascriptDir` that narrows down the search for files to include.  If left alone, `watch.javascriptDir` is used.
 * `pluginPath`: a string, the AMD path to your requirejs text plugin
 * `extensions`: an array of strings,  list of extensions for files to include in the r.js config's 'include' array attached to the text plugin at `pluginPath` path listed above.  Ex: vendor/text!app/foo.html. All files in the watch.javascriptDir/folder that match this extension will be pushed into the array and already present array entries will be left alone. Extensions should not include the period.

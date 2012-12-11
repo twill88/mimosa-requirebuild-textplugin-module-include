@@ -11,7 +11,8 @@ exports.placeholder = ->
   \t
 
     # requireBuildTextPluginInclude:
-      # folder: ""                       # A subdirectory of the javascriptDir used to narrow down the location of included files.
+      # folder: ""                       # A subdirectory of the javascriptDir used to narrow
+                                         # down the location of included files.
       # pluginPath: "vendor/text"        # AMD path to the text plugin
       # extensions: ["html"]             # A list of extensions for files to include in the r.js
                                          # config's 'include' array attached to the text plugin
