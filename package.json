@@ -1,7 +1,7 @@
 {
   "name": "mimosa-requirebuild-textplugin-include",
   "preferGlobal": "false",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/dbashford/mimosa-requirebuild-textplugin-include",
   "author": "David Bashford",
   "description": "Example Mimosa module for modifiying the r.js config pre-optimize",
@@ -22,8 +22,8 @@
     "requirejs"
   ],
   "dependencies": {
-    "logmimosa": "0.2.1",
-    "wrench": "1.4.3"
+    "logmimosa": "0.3.0",
+    "wrench": "1.4.4"
   },
   "license": "MIT",
   "engines": {
