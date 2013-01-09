@@ -24,38 +24,11 @@ exports.placeholder = ->
 
   """
 
-exports.validate = (config) ->
+exports.validate = (config, validators) ->
   errors = []
-  if config.requireBuildTextPluginInclude?
-    rbtpi = config.requireBuildTextPluginInclude
-    if typeof rbtpi is "object" and not Array.isArray(rbtpi)
-
-      if rbtpi.pluginPath?
-        unless typeof rbtpi.pluginPath is "string"
-          errors.push "requireBuildTextPluginInclude.pluginPath must be a string."
-      else
-        errors.push "requireBuildTextPluginInclude.pluginPath must be present."
-
-      if rbtpi.folder?
-        unless typeof rbtpi.folder is "string"
-          errors.push "requireBuildTextPluginInclude.folder must be a string."
-      else
-        errors.push "requireBuildTextPluginInclude.folder must be present."
-
-
-      if rbtpi.extensions?
-        if Array.isArray(rbtpi.extensions)
-          for ex in rbtpi.extensions
-            unless typeof ex is "string"
-              errors.push "requireBuildTextPluginInclude.extensions must be an array of strings."
-              break
-        else
-          errors.push "requireBuildTextPluginInclude.extensions configuration must be an array."
-      else
-        errors.push "requireBuildTextPluginInclude.extensions must be present."
-
-
-    else
-      errors.push "requireBuildTextPluginInclude configuration must be an object."
+  if validators.ifExistsIsObject(errors, "requireBuildTextPluginInclude config", config.requireBuildTextPluginInclude)
+    validators.stringMustExist(errors, "requireBuildTextPluginInclude.pluginPath", config.requireBuildTextPluginInclude.pluginPath)
+    validators.stringMustExist(errors, "requireBuildTextPluginInclude.folder", config.requireBuildTextPluginInclude.folder)
+    validators.isArrayOfStringsMustExist(errors, "requireBuildTextPluginInclude.extensions", config.requireBuildTextPluginInclude.extensions)
 
   errors
