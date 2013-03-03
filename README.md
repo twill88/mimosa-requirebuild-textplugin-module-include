@@ -13,12 +13,6 @@ For more information regarding Mimosa, see http://mimosajs.com
 
 ## Usage
 
-Until it is in NPM...
-
-Clone this repo.  From inside the cloned repo, execute `mimosa mod:install`.  Add `'mimosa-requirebuild-textplugin-include'` to your list of modules.
-
-When it is in NPM...
-
 Add `'mimosa-requirebuild-textplugin-include'` to your list of modules.  That's all!  Mimosa will install the module for you when you start up.
 
 ## Functionality
