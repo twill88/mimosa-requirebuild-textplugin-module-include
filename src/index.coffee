@@ -15,10 +15,12 @@ registration = (mimosaConfig, register) ->
     register ['add','update','remove'], 'beforeOptimize', _appendFilesToInclude, [e.javascript..., e.template...]
     register ['postBuild'],             'beforeOptimize', _appendFilesToInclude
 
-
 _appendFilesToInclude = (mimosaConfig, options, next) ->
-  return next() unless options.runConfigs?.length > 0
-  return next() unless mimosaConfig.requireBuildTextPluginInclude.extensions.length > 0
+  hasRunConfigs = options.runConfigs?.length > 0
+  return next() unless hasRunConfigs
+
+  hasExtensions = mimosaConfig.requireBuildTextPluginInclude.extensions.length > 0
+  return next() unless hasExtensions
 
   options.runConfigs.forEach (runConfig) ->
     includeFolder = __determinePath mimosaConfig.requireBuildTextPluginInclude.folder, runConfig.baseUrl
