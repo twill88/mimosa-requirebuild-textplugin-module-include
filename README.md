@@ -9,7 +9,7 @@ This is a Mimosa module.  It both serves as a module to be used with Mimosa, and
 
 The actual function of this module is to find text dependencies and include them in the `include` array for a r.js run via the requirejs text plugin.
 
-For more information regarding Mimosa, see http://mimosajs.com
+For more information regarding Mimosa, see http://mimosa.io
 
 ## Usage
 
