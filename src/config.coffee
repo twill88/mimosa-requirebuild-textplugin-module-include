@@ -21,6 +21,23 @@ exports.placeholder = ->
                                          # extension will be pushed into the array and already
                                          # present array entries will be left alone. Extensions
                                          # should not include the period.
+      # modules: [{                      # Specify modules to build included files into seperate 
+                                         # modules. This should be used in conjunction with r.js
+                                         # modules, and will prevent the default behaviour of
+                                         # including the text files in a single built file.
+      #   name: ""                       # Name of the module in which to include the files. If
+                                         # the name matches that of a module specified in the
+                                         # r.js config, it will include the files in that module.
+                                         # If the name doesn't match a r.js module, this entry
+                                         # will be ignored.
+      #   folder: ""                     # A subdirectory of the javascriptDir used for this
+                                         # specific module. If not specified, uses the folder
+                                         # specified above.
+      #   pluginPath: ""                 # Allows the use of a different plugin path for this
+                                         # module. If not specified, uses the pluginPath
+                                         # specified above.
+      #   extensions: []                 # Allows the use of different extensions for this module.
+      # }]
 
   """
 
@@ -30,5 +47,14 @@ exports.validate = (config, validators) ->
     validators.stringMustExist(errors, "requireBuildTextPluginInclude.pluginPath", config.requireBuildTextPluginInclude.pluginPath)
     validators.stringMustExist(errors, "requireBuildTextPluginInclude.folder", config.requireBuildTextPluginInclude.folder)
     validators.isArrayOfStringsMustExist(errors, "requireBuildTextPluginInclude.extensions", config.requireBuildTextPluginInclude.extensions)
+    if validators.ifExistsIsArrayOfObjects(errors, "requireBuildTextPluginInclude.modules", config.requireBuildTextPluginInclude.modules)
+      for moduleConfig in config.requireBuildTextPluginInclude.modules
+        validators.stringMustExist(errors, "requireBuildTextPluginInclude.modules.name", moduleConfig.name)
+        unless validators.ifExistsIsString(errors, "requireBuildTextPluginInclude.modules.folder", moduleConfig.folder)
+          moduleConfig.folder = config.requireBuildTextPluginInclude.folder
+        unless validators.ifExistsIsString(errors, "requireBuildTextPluginInclude.modules.pluginPath", moduleConfig.pluginPath)
+          moduleConfig.pluginPath = config.requireBuildTextPluginInclude.pluginPath
+        unless validators.ifExistsIsArrayOfStrings(errors, "requireBuildTextPluginInclude.modules.extensions", moduleConfig.extensions)
+          moduleConfig.extensions = config.requireBuildTextPluginInclude.extensions
 
   errors
