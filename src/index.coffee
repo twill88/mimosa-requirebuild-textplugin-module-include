@@ -53,7 +53,7 @@ __getFileAMD = (file, baseUrl, pluginPath) ->
 
 __appendToModule = (moduleEntry, files) ->
   moduleEntry.include = [] unless Array.isArray(moduleEntry.include)
-  moduleEntry.include.push file for file in files
+  moduleEntry.include = moduleEntry.include.concat files
 
 __determinePath = (thePath, relativeTo) ->
   return thePath if windowsDrive.test thePath

@@ -1,6 +1,6 @@
 {
   "name": "mimosa-requirebuild-textplugin-module-include",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/twill88/mimosa-requirebuild-textplugin-module-include",
   "author": "Thomas Williams",
   "description": "Mimosa module for including text dependencies in r.js modules. Borrows somewhat heavily from https://github.com/dbashford/mimosa-requirebuild-textplugin-include",
